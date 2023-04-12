@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = ({ onSaveExpenseData }) => {
+const ExpenseForm = ({ onSaveExpenseData, cancelClickHandler }) => {
+  // #### MANAGED STATES ####
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
+  // ##### FORM HANDLER FUNCTIONS #####
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
@@ -31,6 +33,22 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+
+    cancelClickHandler();
+  };
+
+  // ##### UTILITY FUNCTIONS #####
+  // Function to ensure expense dates are never beyond today -> used in upper bound of date picker in form
+  const getTodaysDate = () => {
+    const today = new Date();
+    let year = today.getUTCFullYear();
+    let month = today.getUTCMonth();
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    let date = today.getUTCDate();
+
+    return `${year}-${month}-${date}`;
   };
 
   return (
@@ -59,14 +77,19 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
           <input
             type="date"
             min="2020-01-01"
-            max="2023-03-20"
+            max={getTodaysDate()}
             value={enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
       </div>
-      <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
+      <div className="buttons-wrapper">
+        <div>
+          <button onClick={cancelClickHandler}>Cancel</button>
+        </div>
+        <div className="new-expense__actions">
+          <button type="submit">Add Expense</button>
+        </div>
       </div>
     </form>
   );
