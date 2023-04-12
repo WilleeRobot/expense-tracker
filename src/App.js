@@ -15,7 +15,31 @@ const DUMMY_EXPENSES = [
     id: "e3",
     title: "Utilities",
     amount: 300.5,
-    date: new Date(2023, 2, 15),
+    date: new Date(2021, 6, 15),
+  },
+  {
+    id: "e4",
+    title: "Book",
+    amount: 300.5,
+    date: new Date(2021, 9, 8),
+  },
+  {
+    id: "e5",
+    title: "Judo",
+    amount: 300.5,
+    date: new Date(2022, 12, 23),
+  },
+  {
+    id: "e6",
+    title: "Painting",
+    amount: 300.5,
+    date: new Date(2022, 8, 2),
+  },
+  {
+    id: "e7",
+    title: "Piano",
+    amount: 300.5,
+    date: new Date(2022, 8, 2),
   },
 ];
 
